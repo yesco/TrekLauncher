@@ -1,0 +1,222 @@
+<html>
+  <head>
+    <title>Yesco Launcher</title>
+
+    <style>
+      button {
+	  zoom: 1.5;
+	  width: 100px;
+	  text-align: right;
+	  overflow: hide;
+	  padding-top: 5px;
+	  padding-right: 10px;
+	  padding-left: 5px;
+	  padding-bottom: 0px;
+	  height: 40px;
+	  border-radius: 20px;
+	  margin: 0px 0px 0px 0px;
+	  font-weight: bold;
+	  vertical-align: bottom;
+      }
+
+      .text {
+	  line-height: 90%;
+	  //height: 1.5em;
+	  font-family: Ariel;
+	  transform-origin: right;
+	  transform: scale(0.7, 2.5);
+	  text-align: right;
+	  vertical-align: bottom;
+	  display: inline-block;
+      }
+
+
+      .trek {
+	  margin-top: 0;
+	  color: black;
+	  border-radius: 50px 0px 0px 0px;
+	  padding-top: 40px;
+	  padding-left: 20%;
+	  margin-bottom: 7px;
+      }
+
+      .bar {
+	  color: black;
+	  padding-top: 15px;
+	  margin-bottom: 7px;
+      }
+    </style>
+
+  </head>
+  
+  <body style="color:white">
+
+    <h1 class="trek" style="background-color:#00b844; color:red;">
+      <span class='text' style='height:1.5em;'>STARUDATE</span>
+      <span id='sdate' class='text' style='height:1.5em; color:black;'>sdate</span>
+      <span id='time' style="color:black; display:none;"></span>
+
+      <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
+    </h1>
+
+    <div style='display:flex;'>
+      <div style='display:inline-block; width:20%; background-color:#00b844; margin-right:20px;'>&nbsp;</div>
+
+      <div id='applist' style='display:inline-block; max-width:70%;'></div>
+    </div>
+
+
+
+    <script>
+      let favs= "| Calculator | Calendar | Camera | Chrome | Clock | Contacts | Docs | Drive | Facebook | Files by Google | Gallery | Gmail | Google Lens | Maps | Messenger | Phone | Photos | Settings | Termux | Translate | YouTube |";
+      let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff'.split(/ /);
+      
+      function hash(s) {
+	  for(var i = 0, h = 0xdeadbeef; i < s.length; i++)
+	      h = Math.imul(h ^ s.charCodeAt(i), 2654435761);
+	  return (h ^ h >>> 16) >>> 0;
+      }
+      
+      // STARUDATE yydd.tt
+      // -----------------
+      // This my variant of Star Trek's stardate. In the movies there were
+      // at least 3 different definitions over time, neither really useful to us.
+      // I've defined a format that is both intuitive and informative,
+      //
+      // Example: 2024-06-21 04:37 => 54472.19...
+      //                              yyddd.TTttt
+      
+      // Read it as: YEAR= 2024-1970 = 54
+      //             DAY = 472 permille (47.2%) of the year
+      //             TIME= 19% of day (=04:37), 50% is noon (5 digits precision)
+      //
+      // yy is years since 1970, ddd promille of year, tt: 24h as % of day
+      // as floating point number monotonically increasing but not perfectly "linear"
+      // ( because: each real 24h have 2.7 "promille year" (ddd) per real day! )
+      let zoff= new Date().getTimezoneOffset() * 60 * 1000;
+
+      // Returns STARUDATE float as per above
+      function starudate() {
+	  let t= Date.now()-zoff, d= new Date(t), y= d.getFullYear(), s= Date.parse(""+y)+zoff;
+	  let dayofyear= Math.round( (t-s)/1000/24/3600/365.25*1000 );
+	  let decimals= d/1000/3600/24 % 1; // get decimals!
+	  return (y-1970)*1000 + dayofyear + Math.round(decimals*100000)/100000;
+	  return (y-1970)*1000 + dayofyear + Math.round(decimals*100)/100;
+      }
+
+
+      let apps= {};
+      fetch(Bridge.getAppsURL())
+      .then(res=> res.json())
+      .then((res)=> {
+	  // {"packageName":"ctrip.english","label":"Trip.com"}
+	  res.apps.forEach((a)=> {
+	      apps[a.label]= a.packageName;
+	  });
+
+	  let d=document.getElementById("applist");
+	  Object.keys(apps).sort().forEach( (name)=> {
+	      if (favs.search(name)==-1) return;
+	      // create button
+	      let b= document.createElement("button");
+	      let h= hash(name);
+	      let c= colors[h % colors.length];
+	      b.style['background-color']= c;
+	      // TODO: unsafe
+	      b.innerHTML= "<span class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</span>";
+	      b.onclick= ()=> Bridge.requestLaunchApp(apps[name], true);
+	      d.append(b);
+	  });
+
+	  //console.log(Object.keys(apps).sort().join("\n"));
+      });
+
+      let time= document.getElementById('time');
+      let sdate= document.getElementById('sdate');
+      setInterval( ()=> {
+	  time.innerText= new Date().toISOString();
+	  sdate.innerText= starudate();
+      }, 1);
+      
+    </script>
+    
+    <!------------------------------ CALC --------------------------------->
+    
+    </br></br></br>
+    <div class="bar" style="background-color:green;"></div>
+    </br></br></br>
+    
+    <h1 class="trek" style="background-color:#f2c300; color:black;">
+
+      <span class='text' style='height:1.5em;'>CALC</span>
+
+      <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
+    </h1>
+
+
+    <div style='display:flex;'>
+      <div style='display:inline-block; width:20%; background-color:#f2c300; margin-right:20px;'>&nbsp;</div>
+      <span style='display: inline-block;'>
+	<div id='disp' class='xtext' style='background: gray; height:2em; text-align:right; zoom: 2;'>0</div>
+	<div id='expr' class='xtext' style='background: gray; align:right;'>expression</div>
+	<div style='height: 20px;'></div>
+
+	<div id='buttons' style='display: inline-block;'></div>
+      </span>
+    </div>
+
+    <script>
+      let layout= ['MC M+ M- M= E', 'C +/- / * PI', '7 8 9 - LN', '4 5 6 + LG', '1 2 3 = LG2', '0 . DEL SQRT SQR'];
+      let e= '', v= 0, M= 0;
+
+      function SQRT(x) { return Math.sqrt(x); }
+      function LN(x) { return Math.log(x); }
+      function LG(x) { return Math.log10(x); }
+      function LG2(x) { return Math.log2(x); }
+      function SQR(x) { return x*x; }
+      function self(k) { return e= k+'('+e+')' };
+
+      // TODO: +/- sin cos tan () INV RAD   THB USD HKD MYR CNY JPY...
+      let fun= { 'MC': ()=> M= 0, 'M+': ()=> M+= v, 'M-': ()=> M-= v, 'M=': ()=> e+= M,
+		 'C': ()=> {e='';v=0;}, '=': ()=> { v=eval(e); e=v; },
+		 'DEL': ()=> { e= e.substring(0, e.length-1);},
+		 'E': ()=> e+= Math.E, 'PI': ()=> e+= Math.PI,
+		 'SQRT': self, 'LN': self, 'LG': self, 'LG2': self, 'SQR': self,
+	       };
+
+      let disp= document.getElementById('disp');
+      let expr= document.getElementById('expr');
+      let c= document.getElementById('buttons');
+      layout.forEach( (row)=> {
+	  let keys= row.split(/ /);
+	  keys.forEach( (k)=> {
+	      // TODO: extract mkbutton function
+	      let b= document.createElement('button');
+	      b.style['text-align']= 'center';
+
+	      let h= hash(k);
+	      let col= colors[h % colors.length];
+	      b.style['background-color']= col;
+	      b.style.width= '60px';
+	      b.style.height= '2.5em';
+
+	      b.innerHTML= "<span class='text'>"+k+"</span>";
+
+	      let f= fun[k];
+	      b.onclick= ()=> {
+		  if (f) f(k); else e= ''+e+k;
+		  expr.innerText= e;
+		  v= eval(e) || 0;
+		  disp.innerText= v;
+	      };
+
+	      c.append(b);
+	  });
+
+	  c.insertAdjacentHTML('beforeEnd', '</br>');
+      });
+    </script>
+
+    <div style='height: 100px;'></div>
+  </body>
+</html>
