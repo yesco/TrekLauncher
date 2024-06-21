@@ -11,12 +11,13 @@ Or not. But this is my solution. I've sucesssfully used and loved the Niagara La
 This laucner you can set as your Home Screen / Main Launcher, and it is Star Trek designed inspired.
 
 Features:
+- Star Trek looking homescreen
 - Colorful!
 - Each app laucnh button is of different computed hash color, so as long as the name stays same it's same color
 - Displays the current STARUSDATEs
 - Built-in simple but capable Star Trekkie calculator (50 LOC)
-- Access apps by name (A-Z buttons)
-- Acesss apps by keyboard incremental search! Just start typing...
+- [ ] Access apps by name (A-Z buttons)
+- [x] Acesss apps by keyboard incremental search! Just start typing, space runs single matching app
 
 ## Install
 1. Download the APK in the main directory, install it
