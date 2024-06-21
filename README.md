@@ -18,6 +18,14 @@ Features:
 - Access apps by name (A-Z buttons)
 - Acesss apps by keyboard incremental search! Just start typing...
 
+## Install
+1. Download the APK in the main directory, install it
+2. Download/copy this directory to a new directory in Android
+3. Configure BridgeLauncher; navigate to the directory
+4. Reload and test
+5. Set it as main launcher (Android settings search launcher)
+6. Hack!
+
 ## STARUDATE
 Stardates are cool, but what do they mean? Actually, it's not all clear. All Star Trek series had different definitions. You can read more on the [Wikipedia Stardate Page](https://wikipedia.com/wiki/Stardate).
 
