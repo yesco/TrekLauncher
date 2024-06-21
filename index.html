@@ -9,41 +9,42 @@
 	  text-align: right;
 	  overflow: hide;
 	  padding-top: 5px;
-	  padding-right: 10px;
-	  padding-left: 5px;
-	  padding-bottom: 0px;
-	  height: 40px;
-	  border-radius: 20px;
-	  margin: 0px 0px 0px 0px;
-	  font-weight: bold;
-	  vertical-align: bottom;
+          padding-right: 10px;
+          padding-left: 5px;
+          padding-bottom: 0px;
+          height: 40px;
+          border-radius: 20px;
+          margin: 0px 0px 0px 0px;
+          font-weight: bold;
+          vertical-align: bottom;
       }
 
       .text {
-	  line-height: 90%;
-	  //height: 1.5em;
-	  font-family: Ariel;
-	  transform-origin: right;
-	  transform: scale(0.7, 2.5);
-	  text-align: right;
-	  vertical-align: bottom;
-	  display: inline-block;
+          line-height: 90%;
+          //height: 1.5em;
+          font-family: Ariel;
+          transform-origin: right;
+          transform: scale(0.7, 2.5);
+          text-align: right;
+          vertical-align: bottom;
+          display: inline-block;
       }
 
 
       .trek {
-	  margin-top: 0;
-	  color: black;
-	  border-radius: 50px 0px 0px 0px;
-	  padding-top: 40px;
-	  padding-left: 20%;
-	  margin-bottom: 7px;
+          margin-top: 0;
+          color: black;
+          border-radius: 50px 0px 0px 0px;
+          padding-top: 40px;
+          padding-left: 20%;
+          margin-bottom: 7px;
       }
 
       .bar {
-	  color: black;
-	  padding-top: 15px;
-	  margin-bottom: 7px;
+          color: black;
+	  margin-top: 7px;
+          padding-top: 15px;
+          margin-bottom: 7px;
       }
     </style>
 
@@ -52,64 +53,68 @@
 
   <body style='color:white'>
 
-    <h1 class='trek' style='background-color:orange;'>
-      <div>
-	<span class='text' style='height:1.5em;'>STARuDATE</span>
-	<span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
-	<span id='time' style="color:black; display:none;"></span>
-	<span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
-	<span id='text' class='text' style='align: right; height:1.5em;'>TREK LAUNCHER</span>
+    <div style='height:125%;'>
+      <h1 class='trek' style='background-color:orange;'>
+	<div>
+          <span class='text' style='height:1.5em;'>STARuDATE</span>
+          <span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
+          <span id='time' style="color:black; display:none;"></span>
+          <span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
+          <span id='text' class='text' style='align: right; height:1.5em;'>TREK LAUNCHER</span>
+	</div>
+
+	<div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
+      </h1>
+
+      <div style='display:flex;'>
+	<div style='display:inline-block; width:20%; background-color:#00b844; margin-right:20px;'>
+	  <div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
+	</div>
+
+	<div id='applist' style='display:inline-block; max-width:75%;'></div>
       </div>
 
-      <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
-    </h1>
-
-    <div style='display:flex;'>
-      <div style='display:inline-block; width:20%; background-color:#00b844; margin-right:20px;'>&nbsp;</div>
-
-      <div id='applist' style='display:inline-block; max-width:75%;'></div>
+      <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
     </div>
-
-    <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
 
 
     <script>
       let keys= document.getElementById('keys');
       let one; // run if only one match when press space
       document.onkeydown= (e)=>{
-	  e.preventDefault();
-	  //e.stopPropagation();
-	  if (e.key.length==1) keys.innerText+= e.key;
-	  let run;
-	  if (e.key==' ') {
-	      run= one; one= undefined;
-	      // url, launch browser
-	      if (!run && keys.innerText.search('\\.')>=0) {
-		  let url= keys.innerText;
-		  document.location.replace(url.search('http')>=0? url: 'http:'+url);
-	      }
-	      keys.innerText='';
-	  }
-	  search(keys.innerText);
-	  if (run) run();
+          e.preventDefault();
+          //e.stopPropagation();
+          if (e.key.length==1) keys.innerText+= e.key;
+          let run;
+          if (e.key==' ') {
+              run= one; one= undefined;
+              // url, launch browser
+              if (!run && keys.innerText.search('\\.')>=0) {
+                  let url= keys.innerText;
+                  //document.location.replace(url.search('http')>=0? url: 'http:'+url);
+              }
+              keys.innerText='';
+          }
+          search(keys.innerText);
+          if (run) run();
       };
       // changes visibility of all buttons when searching
       function search(s) {
-	  const butts= document.querySelectorAll('button');
-	  let found= undefined;
-	  one= found;
-	  let su= s.toUpperCase();
-	  butts.forEach( (b)=> {
-	      let t= b.textContent.toUpperCase();
-	      //if (!s) { b.style.display= favs.search(t)? 'none': ''; return; }
+          const butts= document.querySelectorAll('button');
+          let found= undefined;
+          one= found;
+          let su= s.toUpperCase();
+          butts.forEach( (b)=> {
+              let t= b.textContent.toUpperCase();
+              //if (!s) { b.style.display= favs.search(t)? 'none': ''; return; }
 
-	      if (t.search(su)>=0) {
-		  b.style.display= '';
-		  if (found) one= undefined; else one= found= b.onclick;
-	      } else {
-		  b.style.display= 'none';
-	      }
-	  });
+              if (t.search(su)>=0) {
+                  b.style.display= '';
+                  if (found) one= undefined; else one= found= b.onclick;
+              } else {
+                  b.style.display= 'none';
+              }
+          });
       }
       
 
@@ -117,13 +122,13 @@
       let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff'.split(/ /);
       
       function hash(s) {
-	  for(var i = 0, h = 0xdeadbeef; i < s.length; i++)
-	      h = Math.imul(h ^ s.charCodeAt(i), 2654435761);
-	  return (h ^ h >>> 16) >>> 0;
+          for(var i = 0, h = 0xdeadbeef; i < s.length; i++)
+              h = Math.imul(h ^ s.charCodeAt(i), 2654435761);
+          return (h ^ h >>> 16) >>> 0;
       }
       
-      // STARUDATE yydd.tt
-      // -----------------
+      // STARUDATE yydd.TTttt
+      // --------------------
       // This my variant of Star Trek's stardate. In the movies there were
       // at least 3 different definitions over time, neither really useful to us.
       // I've defined a format that is both intuitive and informative,
@@ -142,34 +147,36 @@
 
       // Returns STARUDATE float as per above
       function starudate() {
-	  let t= Date.now()-zoff, d= new Date(t), y= d.getFullYear(), s= Date.parse(""+y)+zoff;
-	  let dayofyear= Math.round( (t-s)/1000/24/3600/365.25*1000 );
-	  let decimals= d/1000/3600/24 % 1; // get decimals!
-	  return (y-1970)*1000 + dayofyear + Math.round(decimals*100000)/100000;
-	  return (y-1970)*1000 + dayofyear + Math.round(decimals*100)/100;
+          let t= Date.now()-zoff, d= new Date(t), y= d.getFullYear(), s= Date.parse(""+y)+zoff;
+          let dayofyear= Math.round( (t-s)/1000/24/3600/365.25*1000 );
+          let decimals= d/1000/3600/24 % 1; // get decimals!
+          return (y-1970)*1000 + dayofyear + Math.round(decimals*100000)/100000;
+          return (y-1970)*1000 + dayofyear + Math.round(decimals*100)/100;
       }
 
+      function button(name, action) {
+	  let b= document.createElement("button");
+     	  let h= hash(name);
+	  let c= colors[h % colors.length];
+	  b.style['background-color']= c;
+	  // TODO: unsafe if bad name
+	  b.innerHTML= "<nobr class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</nobr>";
+	  b.onclick= action;
+	  return b;
+      }
 
       let apps= {};
       fetch(Bridge.getAppsURL())
       .then(res=> res.json())
       .then((res)=> {
-	  // {"packageName":"ctrip.english","label":"Trip.com"}
-	  res.apps.forEach((a)=> {
-	      apps[a.label]= a.packageName;
-	  });
+          // {"packageName":"ctrip.english","label":"Trip.com"}
+          res.apps.forEach((a)=> {
+              apps[a.label]= a.packageName;
+          });
 
-	  let d=document.getElementById("applist");
+  	  let d=document.getElementById("applist");
 	  Object.keys(apps).sort().forEach( (name)=> {
-	      //if (favs.search(name)==-1) return;
-	      // create button
-	      let b= document.createElement("button");
-	      let h= hash(name);
-	      let c= colors[h % colors.length];
-	      b.style['background-color']= c;
-	      // TODO: unsafe
-	      b.innerHTML= "<span class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</span>";
-	      b.onclick= ()=> Bridge.requestLaunchApp(apps[name], true);
+	      let b= button(name, ()=> Bridge.requestLaunchApp(apps[name], true));
 
 	      if (favs.search(name)==-1) b.style.display= 'none';
 	      d.append(b);
@@ -187,11 +194,14 @@
       }, 100); // for iso maybe 1 is good?
       
     </script>
+
+    <!-- too  noisy
+	 <div class='bar' style='background-color:orange;'></div>
+    -->
     
     <!------------------------------ CALC --------------------------------->
     
     </br></br></br>
-    <div class="bar" style="background-color:green;"></div>
     </br></br></br>
     
     <h1 class="trek" style="background-color:#f2c300; color:black;">
