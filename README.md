@@ -72,7 +72,7 @@ Here is my definition of StarUDates as I call them. Star Unixbased Dates.
 - [ ] user-configurable (localStorage works in webview?)
 - [ ] alias short names, like WWW for chrome
 - [ ] alphabet menu show all apps
-- [ ] make keyboard incremental search
-- [ ] make a github repo
+- [x] make keyboard incremental search
+- [x] make a github repo
 - [ ] share
 - [ ] get a first user!
