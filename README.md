@@ -58,4 +58,21 @@ Here is my definition of StarUDates as I call them. Star Unixbased Dates.
 	      return (y-1970)*1000 + dayofyear + Math.round(decimals*100)/100;
       }
 
-## Could-Do:s?
+## Ideas
+- [ ] Brows the web with trek CSS?
+- [ ] Web News/feed reader
+- [ ] Star Trek sounds? (illegal?)
+- [ ] a simple web game? TrekMan?
+- [ ] user in-app aliases
+- [ ] folders/categories?
+- [ ] stats of launching apps (top?/hide?/auto top list)
+- [ ] better dialer/contacts? (Bridge doesn't have functionality)
+- [ ] toggle iso-date/STARUDATE
+- [ ] TODO-list/tasks
+- [ ] user-configurable (localStorage works in webview?)
+- [ ] alias short names, like WWW for chrome
+- [ ] alphabet menu show all apps
+- [ ] make keyboard incremental search
+- [ ] make a github repo
+- [ ] share
+- [ ] get a first user!
