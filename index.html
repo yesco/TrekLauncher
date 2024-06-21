@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>Yesco Launcher</title>
+    <title>TrekLauncher</title>
 
     <style>
       button {
 	  zoom: 1.5;
-	  width: 100px;
+	  width: 85px;
 	  text-align: right;
 	  overflow: hide;
 	  padding-top: 5px;
@@ -49,12 +49,17 @@
 
   </head>
   
-  <body style="color:white">
 
-    <h1 class="trek" style="background-color:#00b844; color:red;">
-      <span class='text' style='height:1.5em;'>STARUDATE</span>
-      <span id='sdate' class='text' style='height:1.5em; color:black;'>sdate</span>
-      <span id='time' style="color:black; display:none;"></span>
+  <body style='color:white'>
+
+    <h1 class='trek' style='background-color:orange;'>
+      <div>
+	<span class='text' style='height:1.5em;'>STARuDATE</span>
+	<span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
+	<span id='time' style="color:black; display:none;"></span>
+	<span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
+	<span id='text' class='text' style='align: right; height:1.5em;'>TREK LAUNCHER</span>
+      </div>
 
       <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
     </h1>
@@ -62,12 +67,52 @@
     <div style='display:flex;'>
       <div style='display:inline-block; width:20%; background-color:#00b844; margin-right:20px;'>&nbsp;</div>
 
-      <div id='applist' style='display:inline-block; max-width:70%;'></div>
+      <div id='applist' style='display:inline-block; max-width:75%;'></div>
     </div>
 
+    <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
 
 
     <script>
+      let keys= document.getElementById('keys');
+      let one; // run if only one match when press space
+      document.onkeydown= (e)=>{
+	  e.preventDefault();
+	  //e.stopPropagation();
+	  if (e.key.length==1) keys.innerText+= e.key;
+	  let run;
+	  if (e.key==' ') {
+	      run= one; one= undefined;
+	      // url, launch browser
+	      if (!run && keys.innerText.search('\\.')>=0) {
+		  let url= keys.innerText;
+		  document.location.replace(url.search('http')>=0? url: 'http:'+url);
+	      }
+	      keys.innerText='';
+	  }
+	  search(keys.innerText);
+	  if (run) run();
+      };
+      // changes visibility of all buttons when searching
+      function search(s) {
+	  const butts= document.querySelectorAll('button');
+	  let found= undefined;
+	  one= found;
+	  let su= s.toUpperCase();
+	  butts.forEach( (b)=> {
+	      let t= b.textContent.toUpperCase();
+	      //if (!s) { b.style.display= favs.search(t)? 'none': ''; return; }
+
+	      if (t.search(su)>=0) {
+		  b.style.display= '';
+		  if (found) one= undefined; else one= found= b.onclick;
+	      } else {
+		  b.style.display= 'none';
+	      }
+	  });
+      }
+      
+
       let favs= "| Calculator | Calendar | Camera | Chrome | Clock | Contacts | Docs | Drive | Facebook | Files by Google | Gallery | Gmail | Google Lens | Maps | Messenger | Phone | Photos | Settings | Termux | Translate | YouTube |";
       let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff'.split(/ /);
       
@@ -116,7 +161,7 @@
 
 	  let d=document.getElementById("applist");
 	  Object.keys(apps).sort().forEach( (name)=> {
-	      if (favs.search(name)==-1) return;
+	      //if (favs.search(name)==-1) return;
 	      // create button
 	      let b= document.createElement("button");
 	      let h= hash(name);
@@ -125,6 +170,8 @@
 	      // TODO: unsafe
 	      b.innerHTML= "<span class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</span>";
 	      b.onclick= ()=> Bridge.requestLaunchApp(apps[name], true);
+
+	      if (favs.search(name)==-1) b.style.display= 'none';
 	      d.append(b);
 	  });
 
@@ -135,8 +182,9 @@
       let sdate= document.getElementById('sdate');
       setInterval( ()=> {
 	  time.innerText= new Date().toISOString();
-	  sdate.innerText= starudate();
-      }, 1);
+	  let d= starudate().toFixed(5);
+	  sdate.innerHTML= d.substring(0,d.length-3)+"<sub style='font-size:50%;'>"+d.substr(-3)+'</sub>';
+      }, 100); // for iso maybe 1 is good?
       
     </script>
     
@@ -155,7 +203,7 @@
 
 
     <div style='display:flex;'>
-      <div style='display:inline-block; width:20%; background-color:#f2c300; margin-right:20px;'>&nbsp;</div>
+      <div style='display:inline-block; width:20%; background-color:red; margin-right:20px;'>&nbsp;</div>
       <span style='display: inline-block;'>
 	<div id='disp' class='xtext' style='background: gray; height:2em; text-align:right; zoom: 2;'>0</div>
 	<div id='expr' class='xtext' style='background: gray; align:right;'>expression</div>
