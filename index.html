@@ -188,7 +188,8 @@
 	  Object.keys(apps).sort().forEach( (name)=> {
 	      let nu= name.toUpperCase();
 	      let b= button(nu, ()=> Bridge.requestLaunchApp(apps[name], true));
-
+	      b.style.width= "40%";
+	      b.style.maxWidth= '130px';
 	      if (favs.search(nu)==-1) b.style.display= 'none';
 	      d.append(b);
 	  });
