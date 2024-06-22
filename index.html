@@ -17,7 +17,7 @@
 	  let c= colors[h % colors.length];
 	  b.style.backgroundColor= c;
 	  // TODO: unsafe if bad name
-	  b.innerHTML= "<nobr class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</nobr>";
+	  b.innerHTML= "<nobr class='text' style='zoom:0.85;'>"+name+"</nobr>";
 	  b.onclick= action;
 	  return b;
       }
@@ -128,17 +128,23 @@
     </div>
 
 
+    <!------------------------------ APPS --------------------------------->
+
     <script>
+      // TODO: Make configurable inside browser, can use localStorage?
+      // TODO: Camera - Calendar - Contacts - Phone - Trasnslate - Settings - Clock
+      let favs= "| Chrome | Docs | Drive | Facebook | Files by Google | Gallery | Gmail | Maps | Messenger | Photos | Termux | Whatsapp |".toUpperCase();
+
+      // -- Keyboard Search: Just type, all mathes shown. SPACE-launches if single match, otherwise cancel
       let keys= dom('keys');
       let one; // run if only one match when press space
       document.onkeydown= (e)=>{
           e.preventDefault();
-          //e.stopPropagation();
           if (e.key.length==1) keys.innerText+= e.key;
           let run;
           if (e.key==' ') {
               run= one; one= undefined;
-              // url, launch browser
+              // TODO: url - launch browser (not safe, no default css/colors)
               if (!run && keys.innerText.search('\\.')>=0) {
                   let url= keys.innerText;
                   //document.location.replace(url.search('http')>=0? url: 'http:'+url);
@@ -148,15 +154,16 @@
           search(keys.innerText);
           if (run) run();
       };
-      // changes visibility of all buttons when searching
+
+      // changes visibility of all buttons when searching, '' => only favs
       function search(s) {
-          const butts= document.querySelectorAll('#applist > button');
+          let su= s.toUpperCase();
           let found= undefined;
           one= found;
-          let su= s.toUpperCase();
+          const butts= document.querySelectorAll('#applist > button');
           butts.forEach( (b)=> {
               let t= b.textContent.toUpperCase();
-              //if (!s) { b.style.display= favs.search(t)? 'none': ''; return; }
+              if (!s) { b.style.display= favs.search(t)==-1? 'none': ''; return; }
 
               if (t.search(su)>=0) {
                   b.style.display= '';
@@ -167,8 +174,6 @@
           });
       }
       
-
-      let favs= "| Calculator | Calendar | Camera | Chrome | Clock | Contacts | Docs | Drive | Facebook | Files by Google | Gallery | Gmail | Google Lens | Maps | Messenger | Phone | Photos | Settings | Termux | Translate | YouTube |";
       let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff'.split(/ /);
       
       let apps= {};
@@ -180,13 +185,15 @@
 
   	  let d= dom("applist");
 	  Object.keys(apps).sort().forEach( (name)=> {
-	      let b= button(name, ()=> Bridge.requestLaunchApp(apps[name], true));
+	      let nu= name.toUpperCase();
+	      let b= button(nu, ()=> Bridge.requestLaunchApp(apps[name], true));
 
-	      if (favs.search(name)==-1) b.style.display= 'none';
+	      if (favs.search(nu)==-1) b.style.display= 'none';
 	      d.append(b);
 	  });
       });
 
+      // show STARuDATE or iso-time
       let time= dom('time');
       let sdate= dom('sdate');
       setInterval( ()=> {
@@ -201,18 +208,13 @@
 	 <div class='bar' style='background-color:orange;'></div>
     -->
     
+
     <!------------------------------ CALC --------------------------------->
     
-    </br></br></br>
-    </br></br></br>
-    
     <h1 class="trek" style="background-color:#f2c300; color:black;">
-
       <span class='text' style='height:1.5em;'>CALC</span>
-
       <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
     </h1>
-
 
     <div style='display:flex;'>
       <div style='display:inline-block; width:20%; background-color:red; margin-right:20px;'>&nbsp;</div>
