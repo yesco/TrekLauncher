@@ -55,7 +55,7 @@
     <style>
       button {
 	  zoom: 1.5;
-	  width: 85px;
+	  width: 100px;
 	  text-align: right;
 	  overflow: hide;
 	  padding-top: 5px;
@@ -86,7 +86,7 @@
           color: black;
           border-radius: 50px 0px 0px 0px;
           padding-top: 40px;
-          padding-left: 20%;
+          padding-left: 15%;
           margin-bottom: 7px;
       }
 
@@ -104,24 +104,25 @@
   <body style='color:white'>
 
     <div style='height:125%;'>
+
       <h1 class='trek' style='background-color:orange;'>
 	<div>
           <span class='text' style='height:1.5em;'>STARuDATE</span>
           <span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
           <span id='time' style="color:black; display:none;"></span>
           <span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
-          <span id='text' class='text' style='align: right; height:1.5em;'>TREK LAUNCHER</span>
+          <span id='text' class='text' style='align:right; height:1.5em;'>TREK LAUNCHER</span>
 	</div>
 
-	<div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
+	<div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
       </h1>
 
       <div style='display:flex;'>
-	<div style='display:inline-block; width:20%; background-color:#00b844; margin-right:20px;'>
+	<div style='display:inline-block; width:15%; background-color:#00b844; margin-right:20px;'>
 	  <div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
 	</div>
 
-	<div id='applist' style='display:inline-block; max-width:75%;'></div>
+	<div id='applist' style='display:inline-block; max-width:85%;'></div>
       </div>
 
       <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
@@ -213,18 +214,19 @@
     
     <h1 class="trek" style="background-color:#f2c300; color:black;">
       <span class='text' style='height:1.5em;'>CALC</span>
+
       <div style="background:black; border-radius: 25px 0 0 0;">&nbsp;</div>
     </h1>
 
-    <div style='display:flex;'>
-      <div style='display:inline-block; width:20%; background-color:red; margin-right:20px;'>&nbsp;</div>
-      <span style='display: inline-block;'>
-	<div id='disp' class='xtext' style='background: gray; height:2em; text-align:right; zoom: 2;'>0</div>
+    <div style='display:flex; width:100%;'>
+      <div style='display:inline-block; width:15%; background-color:red; margin-right:20px;'>&nbsp;</div>
+      <span style='display:inline-block; width:85%;'>
+        <div id='disp' class='xtext' style='background: gray; height:2em; text-align:right; zoom: 2;'>0</div>
 	<div id='expr' class='xtext' style='background: gray; align:right;' contenteditable=true></div>
-	<div style='height: 20px;'></div>
+	<div style='height:20px;'></div>
 
-	<div id='buttons' style='display: inline-block;'></div>
-      </span>
+	<div id='buttons' style='display:inline-block; width:100%'></div>
+	</span>
     </div>
 
     <script>
@@ -268,7 +270,7 @@
 	      });
 
               b.style.textAlign= 'left';
-              b.style.width= '60px';
+              b.style.width= '15%'; // 1/6th (div 100 6)
               b.style.height= '2.5em';
 
 	      c.append(b);
