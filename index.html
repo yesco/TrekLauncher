@@ -15,7 +15,7 @@
 	  let b= document.createElement("button");
      	  let h= hash(name);
 	  let c= colors[h % colors.length];
-	  b.style['background-color']= c;
+	  b.style.backgroundColor= c;
 	  // TODO: unsafe if bad name
 	  b.innerHTML= "<nobr class='text' style='zoom:0.85;'>"+name.toUpperCase()+"</nobr>";
 	  b.onclick= action;
