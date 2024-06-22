@@ -230,9 +230,6 @@
     </div>
 
     <script>
-      let layout= ['MC M+ M- M= E', 'C +/- / * PI', '7 8 9 - LN', '4 5 6 + LG', '1 2 3 = LG2', '0 . DEL SQRT SQR'];
-      let e= '', v= 0, M= 0;
-
       // make uppercase aliases for all Math functions (non-enumerable)
       let maths= "abs acos acosh asin asinh atan atan2 atanh cbrt ceil clz32 cos cosh exp expm1 floor fround hypot imul log log10 log1p log2 max min pow random round sign sin sinh sqrt tan tanh trunc".split(/ /);
       maths.forEach(k=> window[k.toUpperCase()]= Math[k]);
@@ -245,6 +242,8 @@
       function self(k) { return e= k+'('+e+')' };
 
       // TODO: +/- sin cos tan () INV RAD   THB USD HKD MYR CNY JPY...
+      let layout= ['MC M+ M- M= E', 'C +/- / * PI', '7 8 9 - LN', '4 5 6 + LG', '1 2 3 = LG2', '0 . DEL SQRT SQR'];
+      let e= '', v= 0, M= 0;
       let fun= { 'MC': ()=> M= 0, 'M+': ()=> M+= v, 'M-': ()=> M-= v, 'M=': ()=> e+= M,
 		 'C': ()=> {e='';v=0;}, '=': ()=> { v=eval(e); e=v; },
 		 'DEL': ()=> { e= e.substring(0, e.length-1);},
@@ -270,6 +269,7 @@
 	      });
 
               b.style.textAlign= 'left';
+	      b.style.transformOrigin= 'left';
               b.style.width= '20%'; // 1/6th (div 100 6)
               b.style.height= '2.5em';
 
