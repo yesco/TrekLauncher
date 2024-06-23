@@ -103,33 +103,30 @@
 
   <body style='color:white'>
 
-    <div style='height:125%;'>
-
-      <h1 class='trek' style='background-color:orange;'>
-	<div>
-          <span class='text' style='height:1.5em;'>STARuDATE</span>
-          <span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
-          <span id='time' style="color:black; display:none;"></span>
-          <span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
-          <span id='text' class='text' style='align:right; height:1.5em;'>TREK LAUNCHER</span>
-	</div>
-
-	<div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
-      </h1>
-
-      <div style='display:flex;'>
-	<div style='display:inline-block; width:15%; background-color:#00b844; margin-right:20px;'>
-	  <div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
-	</div>
-
-	<div id='applist' style='display:inline-block; max-width:85%;'></div>
-      </div>
-
-      <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
-    </div>
-
 
     <!------------------------------ APPS --------------------------------->
+
+    <h1 class='trek' style='background-color:orange;'>
+      <div>
+        <span class='text' style='height:1.5em;'>STARuDATE</span>
+        <span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
+        <span id='time' style="color:black; display:none;"></span>
+        <span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
+        <span id='text' class='text' style='align:right; height:1.5em;'>TREK LAUNCHER</span>
+      </div>
+      
+      <div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
+    </h1>
+
+    <div style='display:flex;'>
+      <div style='display:inline-block; width:15%; background-color:#00b844; margin-right:20px;'>
+	<div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
+      </div>
+
+      <div id='applist' style='display:inline-block; max-width:85%;'></div>
+    </div>
+
+    <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
 
     <script>
       // TODO: Make configurable inside browser, can use localStorage?
@@ -175,7 +172,7 @@
           });
       }
       
-      let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff'.split(/ /);
+      let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff #68B4DA #15458B'.split(/ /);
       
       let apps= {};
       fetch(Bridge.getAppsURL())
@@ -213,21 +210,23 @@
 
     <!------------------------------ CALC --------------------------------->
     
+    <div style='height:100%;'></div>
+
     <h1 class="trek" style="background-color:#f2c300;">
       <span class='text' style='height:1.5em;'>CALC</span>
-
+	
       <div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
     </h1>
 
     <div style='display:flex; width:100%;'>
-      <div style='display:inline-block; width:15%; background-color:red; margin-right:20px;'>&nbsp;</div>
-      <span style='display:inline-block; width:84%;'>
+      <div style='display:inline-block; width:15%; background-color:#A71313; margin-right:20px;'>&nbsp;</div>
+      <span style='display:inline-block; width:84%;max-width:450px'>
         <div id='disp' class='xtext' style='background: gray; height:2em; text-align:right; zoom: 2;'>0</div>
 	<div id='expr' class='xtext' style='background: gray; align:right;' contenteditable=true></div>
 	<div style='height:20px;'></div>
 
-	<div id='buttons' style='display:inline-block; width:100%'></div>
-	</span>
+	<div id='buttons' style='display:inline-block; width:100%;'></div>
+      </span>
     </div>
 
     <script>
@@ -272,6 +271,7 @@
               b.style.textAlign= 'left';
 	      b.style.transformOrigin= 'left';
               b.style.width= '20%'; // 1/6th (div 100 6)
+              b.style.maxWidth= '80px';
               b.style.height= '2.5em';
 
 	      c.append(b);
