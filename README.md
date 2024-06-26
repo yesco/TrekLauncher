@@ -60,20 +60,21 @@ Here is my definition of StarUDates as I call them. Star Unixbased Dates.
       }
 
 ## Ideas
-- [ ] Brows the web with trek CSS?
-- [ ] Web News/feed reader
-- [ ] Star Trek sounds? (illegal?)
+- [ ] keys to categories/builtins: Alarm, Cock, Contacts, Calendar, Camera, Phone, Translate, Settings 
+- [ ] alias short names, like WWW for chrome
+- [ ] toggle iso-date/STARUDATE
 - [ ] a simple web game? TrekMan?
 - [ ] user in-app aliases
-- [ ] folders/categories?
+- [ ] categories (comm, chat, create/view, browse, search)
 - [ ] stats of launching apps (top?/hide?/auto top list)
-- [ ] better dialer/contacts? (Bridge doesn't have functionality)
-- [ ] toggle iso-date/STARUDATE
-- [ ] TODO-list/tasks
 - [ ] user-configurable (localStorage works in webview?)
-- [ ] alias short names, like WWW for chrome
-- [ ] alphabet menu show all apps
-- [x] make keyboard incremental search
-- [x] make a github repo
 - [ ] share
 - [ ] get a first user!
+- [x] alphabet menu show all apps
+- [x] make keyboard incremental search
+- [x] make a github repo
+- [ ] Browse the web with trek CSS?
+- [ ] Web News/feed reader
+- [ ] Star Trek sounds? (illegal?)
+- [ ] better dialer/contacts? (Bridge doesn't have functionality)
+- [ ] TODO-list/tasks

@@ -58,7 +58,7 @@
 	  let d= document.createElement(tag);
 	  tagdef.replaceAll(/\#(\w+)/g, (_,id)=>d.id=id);
 	  tagdef.replaceAll(/\.(\w+)/g, (_,cl)=>d.classList.add(cl));
-	  tagdef.replaceAll(/\$([^=]+)[=:]([^;$]+)/g, (_,a,v)=>{ console.log("$$$", a, v); d.style[a]=v;} );
+	  tagdef.replaceAll(/[\$;]([^=:]+)[=:]([^;$]+)/g, (_,a,v)=>{ console.log("$$$", a, v); d.style[a]=v;} );
 	  rest.flat().forEach( (e)=>{
 	      let t= typeof(e);
 	      if (tag=='ol' || tag=='ul') return d.appendChild(html('li', e));
@@ -122,6 +122,7 @@
           transform-origin: right;
           transform: scale(0.7, 2.5);
           text-align: right;
+	  letter-spacing: 1px;
           vertical-align: bottom;
           display: inline-block;
       }
@@ -158,7 +159,6 @@
         <span id='sdate' class='text' style='height:1.5em; color:brown;'>sdate</span>
         <span id='time' style="color:black; display:none;"></span>
         <span class='text' style='background-color:black; max-width:7px; height:1.7em;'>&nbsp;</span>
-        <span id='text' class='text' style='align:right; height:1.5em;'>TREK LAUNCHER</span>
       </div>
       
       <div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
@@ -169,7 +169,11 @@
 	<div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
       </div>
 
-      <div id='applist' style='display:inline-block; max-width:85%;'></div>
+      <div id='applist' style='display:inline-block; max-width:85%;'>
+        <div class='text' style='align:right; font-size:200%; height:1.5em; color:orange;'>TREK LAUNCHER</div><br/>
+	<div id='alphas' style='padding-bottom:2em;'></div>
+
+      </div>
     </div>
 
     <div id='keys' class='text' style='position:absolute; left:50%; top:50%; zoom:3; color: white; background-color:gray;'></div>
@@ -220,6 +224,13 @@
           });
       }
       
+      // alphabet letters above
+      dom('alphas', html('span', [...Array(26).keys()].map((n) => String.fromCharCode(65 + n)).map((l)=> {
+	  let d= html('span.text$zoom:0.7;background-color:blue;color:yellow;padding-right:0.7em;padding-left:0.7em;margin-bottom:7px;', l);
+	  d.onclick= ()=>search('^'+l);
+	  return d;
+      })));
+	  
       let colors= '#df0000 #0099f6 #f2c300 #00b844 #c1c730 #a71313 #2b53a7 #d6a444 #f5f6fa #ddbbff #33cc99 #cc4499 #4455ff #ffcc33 #9944ff #ff7700 #cc88ff #cc77ff #dd4444 #ffaa90 #ffbbaa #ffcc66 #7788ff #666688 #aaaaff #88ccff #ffaa00 #ff2200 #ff8866 #ff9966 #ff5555 #cc33ff #68B4DA #15458B'.split(/ /);
       
       let apps= {};
@@ -325,7 +336,7 @@
 	      c.append(b);
 	  });
 
-	  c.insertAdjacentHTML('beforeEnd', '</br>');
+	  c.insertAdjacentHTML('beforeEnd', '<br/>');
       });
     </script>
 
