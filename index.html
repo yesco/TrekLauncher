@@ -190,6 +190,8 @@
       document.onkeydown= (e)=>{
           e.preventDefault();
           if (e.key.length==1) keys.innerText+= e.key;
+	  // Enter Tab BackSpace
+	  if (e.key=='Backspace') keys.innerText= keys.innerText.substring(0,keys.innerText.length-1);
           let run;
           if (e.key==' ') {
               run= one; one= undefined;
@@ -243,7 +245,7 @@
 	  Object.keys(apps).sort().forEach( (name)=> {
 	      let nu= name.toUpperCase();
 	      let b= button(nu, ()=> Bridge.requestLaunchApp(apps[name], true));
-	      b.style.width= "40%";
+	      b.style.width= "48%";
 	      b.style.maxWidth= '130px';
 	      if (favs.search(nu)==-1) b.style.display= 'none';
 	      d.append(b);
