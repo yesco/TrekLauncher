@@ -154,9 +154,8 @@
     <!------------------------------ APPS --------------------------------->
 
     <h1 class='trek' style='background-color:orange;'>
-      <div style='align:left; zoom:0.5;'>
-        <span class='text' style='height:2em;'>STARuDATE</span>
-        <span id='sdate' class='text' style='height:2em;color:green;'>sdate</span>
+      <div style='text-align:right; height:1.7em;'>
+        <span id='sdate' class='text' style='color:black;'>sdate</span>
         <span id='time' style="color:black; display:none;"></span>
       </div>
       
@@ -169,7 +168,7 @@
       </div>
 
       <div id='applist' style='display:inline-block; max-width:85%;'>
-        <div class='text' style='text-align:left; font-size:150%; padding-bottom:0.5em; height:1.5em; color:orange;transform-origin:left; width:100%;'>TREK LAUNCHER</div><br/>
+        <div class='text' style='text-align:left; font-size:200%; padding-bottom:0.5em; height:1em; color:orange;transform-origin:left; width:100%;'>TREK LAUNCHER</div><br/>
 	<div id='alphas' style='padding-bottom:1em;'></div>
 
       </div>
@@ -193,7 +192,7 @@
 	  // Enter Tab BackSpace
 	  if (e.key=='Backspace') keys.innerText= keys.innerText.substring(0,keys.innerText.length-1);
           let run;
-          if (e.key==' ') {
+          if (e.key==' ' || e.key=='Enter') {
               run= one; one= undefined;
               // TODO: url - launch browser (not safe, no default css/colors)
               if (!run && keys.innerText.search('\\.')>=0) {
