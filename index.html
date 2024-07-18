@@ -153,6 +153,8 @@
 
     <!------------------------------ APPS --------------------------------->
 
+    <span id="apps"></span>
+
     <h1 class='trek' style='background-color:orange;'>
       <div style='text-align:right; height:1.7em;'>
         <span id='sdate' class='text' style='color:black;'>sdate</span>
@@ -168,7 +170,7 @@
       </div>
 
       <div id='applist' style='display:inline-block; max-width:85%;'>
-        <div class='text' style='text-align:left; font-size:200%; padding-bottom:0.5em; height:1.2em; color:orange;transform-origin:left; width:100%;'><nobr>TREK LAUNCHER</nobr></div><br/>
+        <div class='text' style='text-align:left; font-size:200%; padding-bottom:0.5em; height:1.2em; color:orange; transform-origin:left; width:100%;'><nobr>TREK LAUNCHER</nobr></div><br/>
 	<div id='alphas' style='padding-bottom:1em;'></div>
 
       </div>
@@ -224,7 +226,7 @@
           });
       }
       
-      // alphabet letters above
+      // -- alphabet letters above
       dom('alphas', html('span', [...Array(26).keys()].map((n) => String.fromCharCode(65 + n)).map((l)=> {
 	  let d= html('span.text$zoom:0.7;background-color:blue;color:yellow;padding-right:0.7em;padding-left:0.7em;margin-bottom:1.5em;', l);
 	  d.onclick= ()=>search('^'+l);
@@ -237,7 +239,7 @@
       fetch(Bridge.getAppsURL())
       .then(res=> res.json())
       .then((res)=> {
-          // {"packageName":"ctrip.english","label":"Trip.com"}
+          // structure res= {"packageName":"ctrip.english","label":"Trip.com"}
           res.apps.forEach((a)=> apps[a.label]= a.packageName);
 
   	  let d= dom("applist");
@@ -251,13 +253,14 @@
 	  });
       });
 
-      // show STARuDATE or iso-time
+      // -- show STARuDATE or iso-time
       let time= dom('time');
       let sdate= dom('sdate');
       setInterval( ()=> {
-	  time.innerText= new Date().toISOString();
+          time.innerText= new Date().toISOString();
 	  let d= starudate().toFixed(5);
-	  sdate.innerHTML= d.substring(0,d.length-3)+"<sub style='font-size:50%;'>"+d.substr(-3)+'</sub>';
+         sdate.innerHTML= d.substring(0,d.length-3)+"<sub style='font-size:50%;'>"+d.substr(-3)+'</sub>';
+          sdate.onclick= ()=>{ location.href= '#starudate'; };
       }, 100); // for iso maybe 1 is good?
       
     </script>
@@ -268,6 +271,8 @@
     
     <!------------------------------ CALC --------------------------------->
     
+    <span id="calc"></span>
+
     <h1 class="trek" style="background-color:#f2c300;">
       <span class='text' style='height:1.5em;'>CALC</span>
 	
@@ -340,7 +345,77 @@
       });
     </script>
 
+    <!------------------------------ STARuDATE --------------------------------->
+    
+    <span id="starudate"></span>
+    <h1 class="trek" style="background-color:#d6a444;">
+      <span class='text' style='height:1.5em;'>STARuDATE</span>
+	
+      <div style="background:black; border-radius:25px 0 0 0;">&nbsp;</div>
+    </h1>
+
+    <div style='display:flex;'>
+      <div style='xdisplay:inline-block; width:15%; background-color:#00b844; margin-right:20px;'>
+
+	<!-- TODO: can't remove as side bar too small then? -->
+	<div style='font-weight:bold; bottom:0; text-align:right; color:black; zoom:0.7;'>github.com/yesco/TrekLauncher&nbsp;</div>
+
+      </div>
+
+      <div style='display:inline-block; max-width:85%;'>
+
+	<div class='text' style='text-align:left; color:orange; font-size:150%; height:1.2em; transform-origin:left;'>
+	  <br/>
+	  A STARuDATE IS A UNIX VARIANT OF STAR TREK'S STARDATE.<br/>
+	  <br/>
+	  IT IS MONOTONICALLY INCREASING, BUT NOT CONTIGIOUS.<br/>
+	  <br/>
+	  FORMAT: YYDDD.TTSSS<br/>
+	  <br/>
+
+	  ⧗&nbsp;&nbsp;&nbsp;
+	  BASICALLY, IT EXPRESSES CURRENT YEAR SINCE 1970 [YY].<br/>
+
+	  ⧗&nbsp;&nbsp;&nbsp;
+	  PERMILLE OF YEAR PASSED [DDD].<br/>
+
+	  ⧗&nbsp;&nbsp;&nbsp;
+	  THE CURRENT PERCENT OF DAY PASSED [TT].<br/>
+
+	  ⧗&nbsp;&nbsp;&nbsp;
+	  IN SMALL DIGITS IT SHOWS 10K-SECONDS [SSS].<br/>
+
+	  <br/>
+	  A 10K-SECOND IS SLIGHTLY FASTER THAN AN 86400 SECONDS/DAY.<br/>
+	  A 1 DDD IS 8 HOURS AND 46 MINUTES.<br/>
+	  <br/>
+          FACT: STARDATES IN STAR TREK HAVE AT LEAST 3 DIFFERENT INCONSISTENT DEFINITIONS.
+
+  // TODO: Put in actual updating staruudate and explain it<br/>
+  // Example: 2024-06-21 04:37 => 54472.19... <br/>
+  //                              yyddd.TTttt <br/>
+      
+  // Read it as: YEAR= 2024-1970 = 54 <br/>
+  //             DAY = 472 permille (47.2%) of the year <br/>
+  //             TIME= 19% of day (=04:37), 50% is noon (5 digits precision) <br/>
+  <br/>
+
+  // yy is years since 1970, ddd promille of year, tt: 24h as % of day
+  // as floating point number monotonically increasing but not perfectly "linear"
+  // ( because: each real 24h have 2.7 "promille year" (ddd) per real day! )
+	</div>
+
+      </div>
+    </div>
+    
+    <div style='height:100%;'></div>
+    <div style='height:100%;'></div>
+    <div style='height:100%;'></div>
+    
     <!------------------------------ PLAY --------------------------------->
+
+    <span id="play"></span>
+
     <h1 class="trek" style="background-color:green;">
       <span class='text' style='height:1.5em;'>PLAY</span>
 	
