@@ -129,7 +129,7 @@
 
 
       .trek {
-          margin-top: 0;
+          margin-top: 24px;
           color: black;
           border-radius: 50px 0px 0px 0px;
           padding-top: 40px;
@@ -226,7 +226,7 @@
       
       // alphabet letters above
       dom('alphas', html('span', [...Array(26).keys()].map((n) => String.fromCharCode(65 + n)).map((l)=> {
-	  let d= html('span.text$zoom:0.7;background-color:blue;color:yellow;padding-right:0.5em;padding-left:0.5em;margin-bottom:1.5em;', l);
+	  let d= html('span.text$zoom:0.7;background-color:blue;color:yellow;padding-right:0.7em;padding-left:0.7em;margin-bottom:1.5em;', l);
 	  d.onclick= ()=>search('^'+l);
 	  return d;
       })));
