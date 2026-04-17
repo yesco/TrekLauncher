@@ -1,11 +1,18 @@
 # TrekLauncher
+
+
 A Star Trek inspired Android Launcher/Homescreen
 
 Getting distracted by all the icons on your desktop?
-Did you know you put it up there on the right side, but the icon now moved because you uninstalled an unrelated app?
-Are you panning through your various home screens clutter by too many icons?
+
+*I knew I put it up there on the right side, but the icon now moved because you uninstalled an unrelated app?*
+
+*Are you panning through your various home screens clutter by too many icons?*
+
+
 
 ## Then you need TrekLaucnher
+
 Or not. But this is my solution. I've sucesssfully used and loved the Niagara Launcher, that gives you a simple list of your most used apps. However, on tablets it looks like crap, and the font is too small, and I don't want icons.
 
 This laucner you can set as your Home Screen / Main Launcher, and it is Star Trek designed inspired.
@@ -19,7 +26,10 @@ Features:
 - [ ] Access apps by name (A-Z buttons)
 - [x] Acesss apps by keyboard incremental search! Just start typing, space runs single matching app
 
+
+
 ## Install
+
 1. Download the APK in the main directory, install it
 2. Download/copy this directory to a new directory in Android
 3. Configure BridgeLauncher; navigate to the directory
@@ -27,7 +37,9 @@ Features:
 5. Set it as main launcher (Android settings search launcher)
 6. Hack!
 
+
 ## STARUDATE
+
 Stardates are cool, but what do they mean? Actually, it's not all clear. All Star Trek series had different definitions. You can read more on the [Wikipedia Stardate Page](https://wikipedia.com/wiki/Stardate).
 
 Here is my definition of StarUDates as I call them. Star Unixbased Dates.
@@ -60,6 +72,7 @@ Here is my definition of StarUDates as I call them. Star Unixbased Dates.
       }
 
 ## Ideas
+
 - [ ] keys to categories/builtins: Alarm, Cock, Contacts, Calendar, Camera, Phone, Translate, Settings 
 - [ ] alias short names, like WWW for chrome
 - [ ] toggle iso-date/STARUDATE
